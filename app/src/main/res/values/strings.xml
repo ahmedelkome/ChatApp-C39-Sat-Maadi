@@ -19,8 +19,15 @@
     <string name="choose_room_category">Choose Room Category</string>
     <string name="password_confirm">Password Confirmation</string>
     <string name="create_account">Create Account</string>
+    <string name="create_room">Create Room</string>
+    <string name="send">Send</string>
     <string-array name="rooms_fragments_titles">
         <item>MyRoomsFragment</item>
         <item>AllRoomsFragment</item>
     </string-array>
+
+    <plurals name="members_count">
+        <item quantity="one">%d Member</item>
+        <item quantity="other">%d Members</item>
+    </plurals>
 </resources>

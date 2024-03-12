@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="message"
+            type="com.mis.route.chatapp.database.ChatMessage" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/sender_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{message.userName}"
+            android:textColor="#FF787993"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/first_names" />
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_received_message_background"
+            android:backgroundTint="#EDEDED"
+            android:padding="12dp"
+            android:text="@{message.content}"
+            android:textColor="#FF787993"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sender_name"
+            tools:text="hfds sdfdsf sdf dsf sdfsdaf fdgdf lkjk klsdfs sdhfsdf" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{message.formattedTime}"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="@id/content"
+            app:layout_constraintTop_toBottomOf="@id/content"
+            tools:text="3 am" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

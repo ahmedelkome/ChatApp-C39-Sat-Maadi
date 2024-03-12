@@ -1,14 +1,16 @@
 package com.mis.route.chatapp.ui.auth.fragments.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import com.mis.route.chatapp.Constants
 import com.mis.route.chatapp.R
 import com.mis.route.chatapp.base.BaseFragment
 import com.mis.route.chatapp.database.User
 import com.mis.route.chatapp.databinding.FragmentLoginBinding
-import com.mis.route.chatapp.ui.auth.MainActivity
+import com.mis.route.chatapp.ui.auth.AuthActivity
+import com.mis.route.chatapp.ui.home.HomeActivity
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
@@ -24,6 +26,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         observeLiveData()
+        viewModel.checkUserLoggedIn()
     }
 
     private fun observeLiveData() {
@@ -45,14 +48,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     }
 
     private fun navigateToHome(user: User) {
-        val action = LoginFragmentDirections
-            .actionLoginFragmentToHomeFragment(user)
-        findNavController().navigate(action)
+        startActivity(
+            Intent(
+                requireActivity(),
+                HomeActivity::class.java
+            ).putExtra(Constants.PASSED_USER, user)
+        )
+        requireActivity().finish()
     }
 
     private fun navigateToRegister() {
         if (activity == null) return
-        (activity as MainActivity).navController
+        (activity as AuthActivity).navController
             .navigate(R.id.action_loginFragment_to_registerFragment)
     }
 }

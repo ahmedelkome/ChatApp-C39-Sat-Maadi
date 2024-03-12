@@ -1,20 +1,55 @@
 package com.mis.route.chatapp.ui.home.fragments.myrooms
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.mis.route.chatapp.Constants
 import com.mis.route.chatapp.R
+import com.mis.route.chatapp.base.BaseFragment
+import com.mis.route.chatapp.databinding.FragmentMyRoomsBinding
+import com.mis.route.chatapp.ui.chat.ChatActivity
+import com.mis.route.chatapp.ui.home.adapter.RoomsRecyclerViewAdapter
+import com.mis.route.chatapp.ui.roomdetails.RoomDetailsActivity
 
-class MyRoomsFragment : Fragment() {
+class MyRoomsFragment : BaseFragment<FragmentMyRoomsBinding, MyRoomsViewModel>() {
+    override fun initViewModel() = ViewModelProvider(this)[MyRoomsViewModel::class.java]
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_rooms, container, false)
+    override fun getLayoutId() = R.layout.fragment_my_rooms
+
+    private lateinit var adapter: RoomsRecyclerViewAdapter
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initRecyclerView()
+        observeLiveData()
+        viewModel.fetchRooms()
     }
 
+    private fun observeLiveData() {
+        viewModel.myRooms.observe(viewLifecycleOwner) { roomsList ->
+            adapter.updateRooms(roomsList)
+        }
+    }
+
+    private fun initRecyclerView() {
+        adapter = RoomsRecyclerViewAdapter(emptyList())
+        adapter.setOnRoomClickListener { room ->
+            if (viewModel.checkUserInRoom(room)) {
+                startActivity(
+                    Intent(
+                        requireActivity(),
+                        ChatActivity::class.java
+                    ).putExtra(Constants.PASSED_ROOM, room)
+                )
+            } else {
+                startActivity(
+                    Intent(requireActivity(), RoomDetailsActivity::class.java).putExtra(
+                        Constants.PASSED_ROOM, room
+                    )
+                )
+            }
+        }
+        binding.roomsRecyclerview.adapter = adapter
+    }
 }

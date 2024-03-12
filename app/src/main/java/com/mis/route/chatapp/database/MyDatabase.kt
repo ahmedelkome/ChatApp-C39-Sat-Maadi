@@ -6,7 +6,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.firestore
 
 object MyDatabase {
-    const val usersCollection = "users"
+    private const val usersCollection = "users"
 
     fun createUser(user: User, onComplete: OnCompleteListener<Void>) {
         Firebase
@@ -24,4 +24,6 @@ object MyDatabase {
             .get()
             .addOnCompleteListener(onComplete)
     }
+
+
 }

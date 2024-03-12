@@ -17,8 +17,8 @@ class LoginViewModel : BaseViewModel() {
     val authService = Firebase.auth
     val events = MutableLiveData<LoginViewEvent>()
     fun login() {
-        if (isLoading.value == true)return
-        if (!validateInputs())return
+        if (isLoading.value == true) return
+        if (!validateInputs()) return
         isLoading.value = true
         authService.signInWithEmailAndPassword(
             emailLiveData.value!!,
@@ -76,4 +76,12 @@ class LoginViewModel : BaseViewModel() {
         }
         return isValid
     }
+
+
+    fun checkUserLoggedIn() {
+        val user = Firebase.auth.currentUser ?: return
+        events.value = LoginViewEvent.NavigateToHome(User(user.uid, user.displayName, user.email))
+    }
+
+
 }
