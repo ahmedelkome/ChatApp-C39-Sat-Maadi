@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.mis.route.chatapp.R
 import com.mis.route.chatapp.databinding.ActivityAuthBinding
 
+
 class AuthActivity : AppCompatActivity() {
 
     private var _binding: ActivityAuthBinding? = null
