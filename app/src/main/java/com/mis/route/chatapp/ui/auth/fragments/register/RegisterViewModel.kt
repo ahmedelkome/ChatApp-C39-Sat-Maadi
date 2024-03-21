@@ -8,7 +8,7 @@ import com.mis.route.chatapp.data.Repo.AuthRepoImpl
 import kotlinx.coroutines.launch
 
 class RegisterViewModel : ViewModel() {
-    val authRepo:AuthRepo = AuthRepoImpl()
+    val authRepo: AuthRepo = AuthRepoImpl()
     val userNameLiveData = MutableLiveData<String>()
     val emailLiveData = MutableLiveData<String>()
     val passwordLiveData = MutableLiveData<String>()
@@ -16,12 +16,17 @@ class RegisterViewModel : ViewModel() {
     val emailLiveDataError = MutableLiveData<String?>()
     val passwordLiveDataError = MutableLiveData<String?>()
 
-    fun register(){
-        if (!validate())return
+    fun register() {
+        if (!validate()) return
         viewModelScope.launch {
-            authRepo.register(userNameLiveData.value!!,emailLiveData.value!!,passwordLiveData.value!!)
+            authRepo.register(
+                userNameLiveData.value!!,
+                emailLiveData.value!!,
+                passwordLiveData.value!!
+            )
         }
     }
+
     fun validate(): Boolean {
         var isValid = true
         if (userNameLiveData.value.isNullOrEmpty()) {
@@ -36,7 +41,7 @@ class RegisterViewModel : ViewModel() {
         } else {
             emailLiveDataError.value = null
         }
-        if (userNameLiveData.value.isNullOrEmpty()) {
+        if (passwordLiveData.value.isNullOrEmpty()) {
             passwordLiveDataError.value = "Please Enter Valid Password"
             isValid = false
         } else {

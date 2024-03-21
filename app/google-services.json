@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "937948130873",
-    "project_id": "chat-app-c6b1d",
-    "storage_bucket": "chat-app-c6b1d.appspot.com"
+    "project_number": "574403645780",
+    "project_id": "chat-app-a9696",
+    "storage_bucket": "chat-app-a9696.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:937948130873:android:8348d404bf950ccc88e7e8",
+        "mobilesdk_app_id": "1:574403645780:android:0e2ad90a8a44fe9c82f8c1",
         "android_client_info": {
           "package_name": "com.mis.route.chatapp"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDPXwGiZYjuCxieT2F-0g_h87n63Qs6rnE"
+          "current_key": "AIzaSyAiiNIUJmRCM3oa9BhQxrLGixqclB2bmoQ"
         }
       ],
       "services": {

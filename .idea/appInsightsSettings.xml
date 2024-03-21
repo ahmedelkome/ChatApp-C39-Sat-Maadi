@@ -9,9 +9,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.mis.route.chatapp" />
-                  <option name="mobileSdkAppId" value="1:937948130873:android:8348d404bf950ccc88e7e8" />
-                  <option name="projectId" value="chat-app-c6b1d" />
-                  <option name="projectNumber" value="937948130873" />
+                  <option name="mobileSdkAppId" value="1:574403645780:android:0e2ad90a8a44fe9c82f8c1" />
+                  <option name="projectId" value="chat-app-a9696" />
+                  <option name="projectNumber" value="574403645780" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

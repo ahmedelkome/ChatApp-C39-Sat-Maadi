@@ -11,8 +11,7 @@ class AuthRepoImpl : AuthRepo {
     }
 
     override suspend fun register(userName: String, email: String, password: String): MyUser {
-        val authResult = Firebase.auth.createUserWithEmailAndPassword(userName, email).await()
-
+        val authResult = Firebase.auth.createUserWithEmailAndPassword(email, password).await()
         return MyUser(id = authResult.user?.uid, userName = userName, email = email)
     }
 }

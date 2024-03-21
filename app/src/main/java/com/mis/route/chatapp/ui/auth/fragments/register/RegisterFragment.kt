@@ -30,6 +30,4 @@ class RegisterFragment : Fragment() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
     }
-
-
 }
