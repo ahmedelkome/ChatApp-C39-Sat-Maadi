@@ -1,13 +1,16 @@
 package com.mis.route.chatapp.ui.auth.fragments.register
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mis.route.chatapp.base.BaseViewModel
 import com.mis.route.chatapp.data.Repo.AuthRepo
 import com.mis.route.chatapp.data.Repo.AuthRepoImpl
+import com.mis.route.chatapp.data.model.ViewMessage
 import kotlinx.coroutines.launch
 
-class RegisterViewModel : ViewModel() {
+class RegisterViewModel : BaseViewModel() {
+
+
     val authRepo: AuthRepo = AuthRepoImpl()
     val userNameLiveData = MutableLiveData<String>()
     val emailLiveData = MutableLiveData<String>()
@@ -15,15 +18,38 @@ class RegisterViewModel : ViewModel() {
     val userNameLiveDataError = MutableLiveData<String?>()
     val emailLiveDataError = MutableLiveData<String?>()
     val passwordLiveDataError = MutableLiveData<String?>()
-
+    val event = MutableLiveData<RegisterScreenEvents>()
+    val success = MutableLiveData<Boolean>()
     fun register() {
         if (!validate()) return
         viewModelScope.launch {
-            authRepo.register(
-                userNameLiveData.value!!,
-                emailLiveData.value!!,
-                passwordLiveData.value!!
-            )
+            loadingLiveData.value = true
+            // Log.e("register()", "register() ${loadinLiveData.value}")
+            try {
+                authRepo.register(
+                    userNameLiveData.value!!,
+                    emailLiveData.value!!,
+                    passwordLiveData.value!!
+                )
+                event.value = RegisterScreenEvents.navigateToHomeScreen
+                success.value = true
+            } catch (e: Exception) {
+                errorLiveData.value = ViewMessage(
+                    "Error",
+                    e.localizedMessage,
+                    "OK",
+                    "Cancel",
+                    {
+
+                    },
+                    {
+
+                    }
+                )
+                success.value = false
+                loadingLiveData.value = false
+            }
+            loadingLiveData.value = false
         }
     }
 

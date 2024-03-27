@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.mis.route.chatapp.ui.auth.fragments.login.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +31,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email_container_til"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            error="@{vm.loginEmailLiveDataError}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -37,7 +41,8 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="@={vm.loginEmailLiveData}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -45,6 +50,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/password_container_til"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            error="@{vm.loginPasswordLiveDateError}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -54,7 +60,8 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="@={vm.loginPasswordLiveDate}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,6 +81,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/shape_button_background"
             android:backgroundTint="@color/light_blue"
+            android:onClick="@{()->vm.login()}"
             android:paddingHorizontal="32dp"
             app:layout_constraintTop_toBottomOf="@id/forgot_pass_tv">
 
@@ -112,6 +120,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:onClick="@{()->vm.createNewAccount()}"
             android:text="@string/or_create_new_account"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/login_btn" />

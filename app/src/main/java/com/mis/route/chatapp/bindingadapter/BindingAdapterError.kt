@@ -1,4 +1,4 @@
-package com.mis.route.chatapp.ui.auth.fragments.register
+package com.mis.route.chatapp.bindingadapter
 
 import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout
